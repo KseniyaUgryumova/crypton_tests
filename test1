@@ -1,0 +1,60 @@
+interface Student {
+name: string;
+avgMark: number;
+}
+
+interface Statistics {
+avgMark: number;
+highestMark: string;
+lowestMark:string;
+}
+
+function GetStatistics (marks: Student[]):Statistics {
+var Stat:Statistics;
+var avgM: number;
+var max: number;
+var min: number;
+var count: number;
+var highM:string;
+var lowM:string;
+count = 0;
+avgM = 0;
+highM="";
+lowM = "";
+max = 0;
+min = marks[0].avgMark;
+
+marks.forEach(item =>{
+avgM = avgM + item.avgMark; //сложение баллов студентов
+
+if (item.avgMark>max) { //поиск высшего балла
+max=item.avgMark;
+highM=item.name;
+}
+if(item.avgMark<=min){//поиск самого низкого балла
+min = item.avgMark;
+lowM = item.name;
+}
+
+count++; //счетчик количества студентов
+});
+
+avgM = avgM/count; //вычисление среднего балла
+
+console.log(min);
+Stat = {avgMark : avgM, highestMark : highM, lowestMark : lowM};
+return Stat;
+
+}
+
+const testMarks = [
+{
+name: "Vasya",
+avgMark:3.75
+},
+{
+name:"Lena",
+avgMark: 4.89
+}
+]
+console.log(GetStatistics(testMarks));
