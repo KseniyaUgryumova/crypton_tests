@@ -14,10 +14,8 @@ function GetStatistics (marks: Student[]):Statistics {
   var avgM: number;
   var max: number;
   var min: number;
-  var count: number;
   var highM:string;
   var lowM:string;
-  count = 0;
   avgM = 0;
   highM="";
   lowM = "";
@@ -35,10 +33,9 @@ function GetStatistics (marks: Student[]):Statistics {
       min = item.avgMark;
       lowM = item.name;
     }
-    count++; //счетчик количества студентов
   });
 
-  avgM = avgM/count; //вычисление среднего балла
+  avgM = avgM/marks.length;  //вычисление среднего балла
   
   Stat = {avgMark : avgM, highestMark : highM, lowestMark : lowM};
   return Stat;
