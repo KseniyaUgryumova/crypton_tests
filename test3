@@ -1,0 +1,40 @@
+interface INumbers {
+	n: number; //число
+	Nhole: number; //количество "дырок" в числе
+}
+
+const Num_with_hole = [
+	{n: 4, Nhole: 1},
+	{n: 6, Nhole: 1},
+	{n: 8, Nhole: 2},
+	{n: 9, Nhole: 1},
+	{n: 0, Nhole: 1}
+	];
+
+function SortNums(nums:INumbers[]){
+	
+	for (let i = 0; i < nums.length; i++)//сортировка по количеству дырок
+		for (let j = 0; j < nums.length-1; j++){
+			//console.log(i,j,nums[i].Nhole,nums[j].Nhole);
+			if (nums[i].Nhole > nums[j+1].Nhole) { 
+           		let h = nums[j]; 
+           		nums[j] = nums[j+1];
+           		nums[j+1] = h;
+			}
+		}
+	for (let i = 0; i < nums.length; i++) //сортировка по возрастанию числа
+		for (let j = 0; j < nums.length-1; j++){
+			if (nums[j].Nhole==nums[j+1].Nhole){
+				if (nums[j].n>nums[j+1].n){
+					let m = nums[j];
+					nums[j]=nums[j+1];
+					nums[j+1]=m;					
+				}
+			}
+		}	
+	nums.forEach(item=>{
+		console.log(item.n)
+	});
+};
+
+console.log(SortNums(Num_with_hole));
