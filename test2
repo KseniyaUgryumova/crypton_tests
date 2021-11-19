@@ -1,0 +1,55 @@
+let N = Number(prompt("Введите число:"));
+let arrN = [];
+let comArr = []; //массив перестановок
+let Pm :number; //число возможных перестановок
+
+for (let i = 0; i < N*2; i++){ //запись чисел в массив
+if (i<N){
+arrN[i]=i+1; // запись N разных чисел
+}
+else
+arrN[i] =0; // запись N одинаковых чисел (в данном случае 0)
+}
+arrN.sort();
+
+
+function Factorial(n:number):number{
+return (n != 1) ? n * Factorial(n - 1) : 1;
+}
+
+Pm = Factorial(arrN.length)/Factorial(arrN.length/2); //число возможных перестановок с повторениями
+
+function Combinations(arr,n:number):boolean{
+    //console.log(comArr); //функция перестановок
+    
+let j = n-2;
+while(j!=-1 && arr[j]>=arr[j+1]) j--;
+if(j==-1){
+console.log("Больше перестановок нет");
+return false;
+}
+let k = n-1;
+while (arr[j] >= arr[k]) k--;
+let s = arr[j];
+arr[j] = arr[k];
+arr[k] = s;
+
+let l = j+1;
+let r = n-1;
+while (l<=r){
+let s1=arr[l];
+arr[l]=arr[r];
+arr[r]=s1;
+
+l++;
+r--;
+}
+
+return true;
+}
+
+while(Combinations(arrN,arrN.length)){
+        console.log(arrN);
+    }
+
+console.log("Всего перестановок: " + Pm);
